@@ -9,6 +9,7 @@ urlpatterns = [
     # Home page url
     path('', views.home, name='home'),
     # Recipe posts page url
-    path('recipeposts', views.recipeposts, name='recipeposts')
-    
+    path('recipeposts', views.recipeposts, name='recipeposts'),
+    # Create page url
+    path('create', views.create, name='create')    
 ]

@@ -55,3 +55,28 @@ html {
     padding: 8px 16px;
     border-radius: 16px;
 }
+
+.container{
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.main-container{
+    width: 80%;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    border-radius: 16px;
+    padding: 32px;
+}
+
+.title{
+    margin: 0;;
+}
+
+.topbar{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}

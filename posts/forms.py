@@ -1,0 +1,19 @@
+from django import forms
+from .models import *
+
+class RecipePostForm(forms.ModelForm):
+    # create forms for the recipepost model in models.py 
+    title = forms.CharField(
+        label = "Recipe Title",
+        max_length=100,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter the title of your recipe'})
+    )
+    content = forms.CharField(
+        label= "Recipe Content",
+        widget=forms.Textarea(attrs={'placeholder': 'Enter the content of your recipe', 'rows': 8})
+    )
+
+    # Meta class to specify the model and fields to be used in the form
+    class Meta:
+        model= RecipePost
+        fields = ['title', 'content']

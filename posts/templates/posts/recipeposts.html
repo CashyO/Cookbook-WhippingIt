@@ -4,9 +4,17 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <div>
-        Welcome to the recipe posts page!  
+
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">Recipe Posts of User</h1>
+            <a class="btn btn-primary" href="{%url 'create'%}">Create Recipe Post</a>
+        </div>
+
+        <div>
+            Space for our recipe posts to be displayed... 
+        </div>
+
     </div>
 
-    <a href="{%url 'home' %}">Link to Home Page</a>
 {% endblock %}

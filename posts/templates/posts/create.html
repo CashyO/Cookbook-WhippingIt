@@ -1,0 +1,25 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the create page for the posts app -->
+ <!-- Content of the page -->
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">Create a Recipe Post</h1>
+        </div>
+
+        <form method="post">
+            {% csrf_token %}
+            <!--{{form| crispy}} (render all the forms at once) -->
+            <!-- {{form.title | as_crispy_field}}
+            {{form.content | as_crispy_field}}  (render a specific field at a time)-->
+            {{form| crispy}}
+            <button type="submit" class="btn btn-primary">Submit your recipe</button>
+        </form>
+
+
+    </div>
+
+{% endblock %}
