@@ -1,0 +1,44 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the base boilerplate code for all pages in the posts app -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<!-- Details for the page -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CookBook App</title>
+    <!-- Link to CSS file -->
+    <link rel="stylesheet" href="{%static 'posts/main.css'%}"> 
+</head>
+<!-- Content of the page -->
+<body>
+
+    <nav class="navbar">
+        
+        <div class="navbar-logo"> 
+            <a href="/">
+                <img class="logo" src="{%static 'posts/WhippingIt-Logo-v1.png'%}" alt="My logo">
+            </a>
+        </div>
+        
+        <ul class="navbar-links">
+            <li>
+                <a href="{% url 'home'%}" class="{% if request.path == '/'%}active{%endif%}"> Home</a>
+            </li>
+            <li> 
+                <a href="{% url 'recipeposts'%}" class="{% if request.path == '/recipeposts'%}active{%endif%}"> My recipe posts</a> 
+            </li>
+            <li>
+                <a href="#" class="{% if request.path == '#'%}active{%endif%}"> Signed in as : User 1 </a>
+            </li>
+        </ul>
+    </nav>
+
+    <div>
+        {%block content%}
+        {%endblock%}
+    </div>
+</body>
+
+</html>

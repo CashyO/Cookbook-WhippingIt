@@ -1,0 +1,12 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the recipe posts page for the posts app -->
+<!-- Content of the page -->
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div>
+        Welcome to the recipe posts page!  
+    </div>
+
+    <a href="{%url 'home' %}">Link to Home Page</a>
+{% endblock %}
