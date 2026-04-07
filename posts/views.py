@@ -7,8 +7,13 @@ from .models import *
 
 # Home page view
 def home(request):
-    title = "this is my title"
-    context = {'title': title}
+    # Retrieve all recipe posts from the database (.filter() can be used to filter the results based on certain criteria) 
+    recipes = RecipePost.objects.all().order_by('-created_on') 
+    recipescount = recipes.count()
+    context = {
+        'recipes': recipes,
+        'recipescount': recipescount
+        }
     return render(request, 'posts/home.html', context)
 
 # Recipe posts page view
@@ -37,3 +42,22 @@ def create(request):
             return redirect('recipeposts')
     context = {'form': form}
     return render(request, 'posts/create.html', context)
+
+def edit(request, pk):
+    recipe = RecipePost.objects.get(id=pk)
+    form = RecipePostForm(instance=recipe)
+    if request.method == 'POST':
+        form = RecipePostForm(request.POST, instance=recipe)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    context = {'form': form}
+    return render(request, 'posts/edit.html', context)
+
+def delete(request, pk):
+    recipe = RecipePost.objects.get(id=pk)
+    if request.method == 'POST':
+        recipe.delete()
+        return redirect('home')
+    context = {'recipe': recipe}
+    return render(request, 'posts/delete.html', context)

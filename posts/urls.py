@@ -11,5 +11,9 @@ urlpatterns = [
     # Recipe posts page url
     path('recipeposts', views.recipeposts, name='recipeposts'),
     # Create page url
-    path('create', views.create, name='create')    
+    path('create', views.create, name='create'), 
+    # Edit page url
+    path('edit/<int:pk>', views.edit, name='edit'),
+    # Delete page url   
+    path('delete/<int:pk>', views.delete, name='delete')
 ]

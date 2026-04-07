@@ -4,9 +4,39 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <div>
-        Welcome to the home page!  
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">Welcome to the Cookbook home page</h1>
+        </div>
+
+        {% if recipescount == 0 %}
+        <p>There are no recipe posts available.</p>
+        {% else %}
+
+        <div>
+            {% for recipe in recipes %}
+                <div class="article">
+                    <div class="article-image">
+                        
+                    </div>
+                    
+                    <div class="article-content">
+                        <h2>{{recipe.title}}</h2>
+                        <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
+                        <p>{{recipe.content|truncatechars:200}}</p>
+                        
+                        <div class="article-actions">
+                            <a class="btn btn-outline-primary" href="{%url 'edit' recipe.id %}">Edit</a>
+                            <a class="btn btn-outline-danger" href="{%url 'delete' recipe.id %}">Delete</a>
+                        </div>
+                    
+                    </div>
+
+                    
+                </div>
+            {% endfor %}
+        </div>
+        {% endif %}
     </div>
 
-    <a href="{%url 'recipeposts' %}">Link to Recipe Posts Page</a>
 {% endblock %}

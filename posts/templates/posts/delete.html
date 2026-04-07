@@ -1,0 +1,34 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the delete page for the posts app -->
+ <!-- Content of the page -->
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">Delete a Recipe Post</h1>
+        </div>
+
+        <div class="article-delete">
+            
+            <div class="article-content">
+                <h2>{{recipe.title}}</h2>
+                <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
+                <p>{{recipe.content|truncatechars:200}}</p>
+                
+                <div class="article-image-delete"></div>
+                
+            </div>      
+        </div>
+
+        <form method="post">
+            {% csrf_token%}
+            <p class="delete-text">Are you sure you want to delete this recipe?</p>
+            <button class="btn btn-danger">Yes, delete</button>
+            <a class="btn btn-secondary" href="{%url 'home'%}">Cancel</a>
+        </form>
+
+
+    </div>
+
+{% endblock %}
