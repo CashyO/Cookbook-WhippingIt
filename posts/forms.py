@@ -12,8 +12,25 @@ class RecipePostForm(forms.ModelForm):
         label= "Recipe Content",
         widget=forms.Textarea(attrs={'placeholder': 'Enter the content of your recipe', 'rows': 8})
     )
+    image = forms.ImageField(
+        label= "UploadRecipe Image",
+        required=False,
+        widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'})
+    )
+    category = forms.ModelChoiceField(
+        queryset=Category.objects.all(),
+        required=False,
+        label="Select Category",
+        widget=forms.Select(attrs={'class': 'form-control'})
+    )
+    tags = forms.ModelMultipleChoiceField(
+        queryset=Tag.objects.all(),
+        required=False,
+        label="Select Tags",
+        widget=forms.SelectMultiple(attrs={'class': 'form-control'})
+    )
 
     # Meta class to specify the model and fields to be used in the form
     class Meta:
         model= RecipePost
-        fields = ['title', 'content']
+        fields = ['title', 'content', 'image', 'category', 'tags']

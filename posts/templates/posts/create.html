@@ -10,7 +10,7 @@
             <h1 class="title">Create a Recipe Post</h1>
         </div>
 
-        <form method="post">
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <!--{{form| crispy}} (render all the forms at once) -->
             <!-- {{form.title | as_crispy_field}}

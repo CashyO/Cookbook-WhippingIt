@@ -15,5 +15,7 @@ urlpatterns = [
     # Edit page url
     path('edit/<int:pk>', views.edit, name='edit'),
     # Delete page url   
-    path('delete/<int:pk>', views.delete, name='delete')
+    path('delete/<int:pk>', views.delete, name='delete'),
+    # Details page url   
+    path('details/<int:pk>', views.details, name='details')
 ]

@@ -16,7 +16,11 @@
                 <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
                 <p>{{recipe.content|truncatechars:200}}</p>
                 
-                <div class="article-image-delete"></div>
+                <div class="article-image-delete">
+                    {% if recipe.image%}
+                    <img src="{{recipe.image.url}}">
+                    {% endif%}
+                </div>
                 
             </div>      
         </div>

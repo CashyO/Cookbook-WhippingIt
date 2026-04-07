@@ -1,0 +1,31 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the details page for the posts app -->
+ <!-- Content of the page -->
+{% extends 'posts/base.html' %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">{{recipe.title}}</h1>
+        </div>
+
+        
+            
+        <div class="article-content">
+            
+            <div class="article-image-details">
+                {% if recipe.image%}
+                <img src="{{recipe.image.url}}">
+                {% endif%}
+            </div>
+
+            <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
+            <p>{{recipe.content|linebreaks}}</p>
+            
+        </div>      
+        
+
+
+    </div>
+
+{% endblock %}

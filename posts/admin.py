@@ -5,3 +5,5 @@ from .models import *
 # Register your models here.
 
 admin.site.register(RecipePost)
+admin.site.register(Category)
+admin.site.register(Tag)
