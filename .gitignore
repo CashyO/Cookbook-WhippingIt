@@ -1,0 +1,70 @@
+# =========================
+# Python
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+# =========================
+# Virtual Environment
+# =========================
+myenv/
+venv/
+env/
+
+# =========================
+# Django
+# =========================
+*.log
+*.pot
+*.pyc
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# =========================
+# Environment Variables
+# =========================
+.env
+.env.*
+
+# =========================
+# Static & Media Files
+# =========================
+/staticfiles/
+/media/
+
+# =========================
+# Migrations (optional)
+# =========================
+# Uncomment if you DON'T want migrations tracked
+# **/migrations/*
+# !**/migrations/__init__.py
+
+# =========================
+# IDE / Editor
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# =========================
+# OS Files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Testing / Coverage
+# =========================
+.coverage
+htmlcov/
+.pytest_cache/
+
+# =========================
+# Node (if using React/Vite frontend)
+# =========================
+node_modules/
+dist/
+build/
