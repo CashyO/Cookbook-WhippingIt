@@ -43,10 +43,18 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     # Local apps 
     'posts',
+    'users',
     # Third party apps
     'crispy_forms',
     'crispy_bootstrap4',
 ]
+
+# Login Settings
+LOGIN_REDIRECT_URL = '/'
+LOGIN_URL = '/users/login'
+# Logout Settings
+LOGOUT_REDIRECT_URL = '/'
+
 
 # Crispy Forms settings 
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"

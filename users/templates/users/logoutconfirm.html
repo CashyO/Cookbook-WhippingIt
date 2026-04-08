@@ -1,0 +1,22 @@
+<!-- # Flow: urls.py -> views.py -> templates -->
+<!-- This is the logout confirm page for the users app -->
+ <!-- Content of the page -->
+{% extends 'posts/base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <div class="main-container">
+        <div class="topbar">
+            <h1 class="title">Confirm Logout from Whipping It!</h1>
+        </div>
+
+        <p>Hi {{user.username}}, Are you sure you want to logout of your account?</p>
+
+        <form action="{% url 'logout'%}" method="post">
+            {% csrf_token%} 
+            <button class="btn btn-primary" type="submit">Logout</button>
+        </form>
+
+    </div>
+
+{% endblock %}

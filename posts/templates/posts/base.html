@@ -27,12 +27,30 @@
             <li>
                 <a href="{% url 'home'%}" class="{% if request.path == '/'%}active{%endif%}"> Home</a>
             </li>
+
+            {% if user.is_authenticated%}
+
             <li> 
                 <a href="{% url 'recipeposts'%}" class="{% if request.path == '/recipeposts'%}active{%endif%}"> My recipe posts</a> 
             </li>
             <li>
-                <a href="#" class="{% if request.path == '#'%}active{%endif%}"> Signed in as : User 1 </a>
+                <a href="{%url 'profile'%}" class="{% if request.path == '/users/profile'%}active{%endif%}"> Signed in as : {{user.username}} </a>
             </li>
+            
+            <li> 
+                <a href="{%url 'logoutconfirm'%}" class="{% if request.path == '/users/confirm/logout'%}active{%endif%}"> Log Out</a> 
+            </li>
+
+            {% else%}
+            
+            <li> 
+                <a href="{% url 'signup'%}" class="{% if request.path == '/users/signup'%}active{%endif%}"> Sign Up</a> 
+            </li>
+            
+            <li> 
+                <a href="{% url 'login'%}" class="{% if request.path == '/users/login'%}active{%endif%}"> Log In</a> 
+            </li>
+            {% endif%}
         </ul>
     </nav>
 

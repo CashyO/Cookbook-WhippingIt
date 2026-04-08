@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from .forms import *
 from .models import *
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 # Flow: urls.py -> views.py -> templates
@@ -17,8 +18,9 @@ def home(request):
     return render(request, 'posts/home.html', context)
 
 # Recipe posts page view
+@login_required
 def recipeposts(request):
-    recipes = RecipePost.objects.all().order_by('-created_on') 
+    recipes = RecipePost.objects.filter(created_by=request.user).order_by('-created_on') 
     recipescount = recipes.count()
     context = {
         'recipes': recipes,
@@ -27,6 +29,7 @@ def recipeposts(request):
     return render(request, 'posts/recipeposts.html', context)
 
 # Create page view
+@login_required
 def create(request):
     form = RecipePostForm()
     # Handle form submission --> POST request 
@@ -44,7 +47,8 @@ def create(request):
                 title=title, 
                 content=content,
                 image=image,
-                category=category
+                category=category, 
+                created_by=request.user
             )
             recipe.save()
             recipe.tags.set(tags) # Set the many-to-many relationship for tags
@@ -55,8 +59,11 @@ def create(request):
     return render(request, 'posts/create.html', context)
 
 # Edit page view
+@login_required
 def edit(request, pk):
-    recipe = RecipePost.objects.get(id=pk)
+    recipe = RecipePost.objects.get(id=pk) # Get the recipe post object with the given id and created by the current user)
+    if request.user != recipe.created_by:
+        return redirect('home')
     form = RecipePostForm(instance=recipe)
     if request.method == 'POST':
         form = RecipePostForm(request.POST, request.FILES, instance=recipe)
@@ -67,8 +74,11 @@ def edit(request, pk):
     return render(request, 'posts/edit.html', context)
 
 # Delete page view
+@login_required
 def delete(request, pk):
-    recipe = RecipePost.objects.get(id=pk)
+    recipe = RecipePost.objects.get(id=pk) # Get the recipe post object with the given id and created by the current user)
+    if request.user != recipe.created_by:
+        return redirect('home')
     if request.method == 'POST':
         recipe.delete()
         return redirect('home')
