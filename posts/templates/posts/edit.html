@@ -5,21 +5,24 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-    <div class="main-container">
-        <div class="topbar">
-            <h1 class="title">Edit a Recipe Post</h1>
+<div class="form-page">
+    <div class="page-header-card">
+        <div>
+            <h1 class="page-title">Edit Recipe Post</h1>
+            <p class="page-subtitle">Update your recipe details and keep everything current.</p>
         </div>
-
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            <!--{{form| crispy}} (render all the forms at once) -->
-            <!-- {{form.title | as_crispy_field}}
-            {{form.content | as_crispy_field}}  (render a specific field at a time)-->
-            {{form| crispy}}
-            <button type="submit" class="btn btn-primary">Submit your recipe</button>
-        </form>
-
-
     </div>
 
+    <div class="form-card">
+        <form method="post" enctype="multipart/form-data" class="recipe-form">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary btn-pill">Save Changes</button>
+                <a href="{% url 'recipeposts' %}" class="btn btn-outline-secondary btn-pill">Cancel</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock %}

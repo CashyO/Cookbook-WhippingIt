@@ -4,35 +4,46 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <div class="main-container">
-        <div class="topbar">
-            <h1 class="title">Delete a Recipe Post</h1>
+<div class="delete-page">
+    <div class="page-header-card">
+        <div>
+            <h1 class="page-title">Delete Recipe Post</h1>
+            <p class="page-subtitle">Review the recipe below before permanently deleting it.</p>
         </div>
-
-        <div class="article-delete">
-            
-            <div class="article-content">
-                <h2>{{recipe.title}}</h2>
-                <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
-                <p>{{recipe.content|truncatechars:200}}</p>
-                
-                <div class="article-image-delete">
-                    {% if recipe.image%}
-                    <img src="{{recipe.image.url}}">
-                    {% endif%}
-                </div>
-                
-            </div>      
-        </div>
-
-        <form method="post">
-            {% csrf_token%}
-            <p class="delete-text">Are you sure you want to delete this recipe?</p>
-            <button class="btn btn-danger">Yes, delete</button>
-            <a class="btn btn-secondary" href="{%url 'home'%}">Cancel</a>
-        </form>
-
-
     </div>
 
+    <div class="delete-card">
+        <div class="delete-card-image">
+            {% if recipe.image %}
+                <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+            {% else %}
+                <div class="recipe-card-placeholder"></div>
+            {% endif %}
+        </div>
+
+        <div class="delete-card-content">
+            <h2 class="delete-card-title">{{ recipe.title }}</h2>
+
+            <div class="delete-card-meta">
+                <span>{{ recipe.created_on|date:"F j, Y" }}</span>
+                {% if recipe.category %}
+                    <span class="recipe-card-dot">&middot;</span>
+                    <span class="delete-card-category">{{ recipe.category.name }}</span>
+                {% endif %}
+                <span class="recipe-card-dot">&middot;</span>
+                <span>by {{ recipe.created_by.username }}</span>
+            </div>
+
+            <p class="delete-card-text">{{ recipe.content|truncatechars:240 }}</p>
+
+            <p class="delete-warning-text">Are you sure you want to delete this recipe? This action cannot be undone.</p>
+
+            <form method="post" class="delete-actions">
+                {% csrf_token %}
+                <button class="btn btn-danger btn-pill" type="submit">Yes, Delete</button>
+                <a class="btn btn-outline-secondary btn-pill" href="{% url 'recipeposts' %}">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
 {% endblock %}

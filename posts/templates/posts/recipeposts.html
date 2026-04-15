@@ -4,62 +4,61 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-
-    <div class="main-container">
-        <div class="topbar">
-            <h1 class="title">Recipe Posts of {{user.username}}</h1>
-            <a class="btn btn-primary" href="{%url 'create'%}">Create Recipe Post</a>
+<div class="main-container home-page">
+    <div class="topbar home-topbar recipeposts-topbar">
+        <div>
+            <h1 class="title">Recipe Posts of {{ user.username }}</h1>
+            <p class="home-subtitle">Manage the recipes you have created.</p>
         </div>
 
-        {% if recipescount == 0 %}
-        <p>There are no recipe posts available.</p>
-        {% else %}
+        <a class="btn btn-primary create-post-btn" href="{% url 'create' %}">Create Recipe Post</a>
+    </div>
 
-        <div>
+    {% if recipescount == 0 %}
+        <div class="empty-state">
+            <p>There are no recipe posts available.</p>
+        </div>
+    {% else %}
+        <div class="recipe-grid">
             {% for recipe in recipes %}
-                <div class="article">
-                    <div class="article-image">
+                <div class="recipe-card">
+                    <div class="recipe-card-image">
                         {% if recipe.image %}
-                        <img src="{{recipe.image.url}}">
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                        {% else %}
+                            <div class="recipe-card-placeholder"></div>
                         {% endif %}
                     </div>
-                    
-                    <div class="article-content">
-                        <h2>{{recipe.title}}</h2>
 
-                        <div class="article-details">
-                            <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
+                    <div class="recipe-card-content">
+                        <h2 class="recipe-card-title">{{ recipe.title }}</h2>
 
-                            {% if recipe.category%}
-                            <div class="article-dot"> &middot; </div>
-                            <p class="article-category">{{recipe.category.name}}</p>
-                            {% endif%}
+                        <div class="recipe-card-details">
+                            <span class="recipe-card-date">{{ recipe.created_on|date:"F j, Y" }}</span>
+
+                            {% if recipe.category %}
+                                <span class="recipe-card-dot">&middot;</span>
+                                <span class="recipe-card-category">{{ recipe.category.name }}</span>
+                            {% endif %}
                         </div>
 
-                        
-                        <p>{{recipe.content|truncatechars:200}}</p>
+                        <p class="recipe-card-text">{{ recipe.content|truncatechars:120 }}</p>
 
-                        {% if recipe.tags.all%}
-                        <div class="tag-holder">
-                            {% for tag in recipe.tags.all %}
-                                <span class="article-tags">#{{tag.name}}</span>
-                            {% endfor%}
+                        <div class="recipe-card-tags">
+                            {% for tag in recipe.tags.all|slice:":3" %}
+                                <span class="article-tags">#{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
 
+                        <div class="recipe-card-actions recipepost-actions">
+                            <a class="btn btn-outline-primary" href="{% url 'details' recipe.id %}">View</a>
+                            <a class="btn btn-outline-primary" href="{% url 'edit' recipe.id %}">Edit</a>
+                            <a class="btn btn-outline-danger" href="{% url 'delete' recipe.id %}">Delete</a>
                         </div>
-                        {% endif%}
-                        
-                        <div class="article-actions">
-                            <a class="btn btn-outline-primary" href="{%url 'edit' recipe.id %}">Edit</a>
-                            <a class="btn btn-outline-danger" href="{%url 'delete' recipe.id %}">Delete</a>
-                        </div>
-                    
                     </div>
-
-                    
                 </div>
             {% endfor %}
         </div>
-        {% endif %}
-    </div>
-
+    {% endif %}
+</div>
 {% endblock %}

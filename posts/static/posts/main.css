@@ -383,3 +383,377 @@ html {
     border-radius: 12px;
     text-align: center;
 }
+
+.recipeposts-topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.create-post-btn {
+    white-space: nowrap;
+}
+
+.recipepost-actions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-top: auto;
+}
+
+.recipepost-actions .btn {
+    width: 100%;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .recipeposts-topbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .create-post-btn {
+        width: 100%;
+        text-align: center;
+    }
+
+    .recipepost-actions {
+        grid-template-columns: 1fr;
+    }
+}
+
+/*  GUI updates for user user actions */
+/* =========================
+   GLOBAL SITE SHELL
+========================= */
+.site-body {
+    margin: 0;
+    padding: 0;
+    background: #f5f5f5;
+    color: #222;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.site-main {
+    padding: 36px 0 60px;
+}
+
+.page-shell {
+    width: min(1200px, 92%);
+    margin: 0 auto;
+}
+
+.btn-pill {
+    border-radius: 999px;
+    padding-left: 18px;
+    padding-right: 18px;
+    font-weight: 600;
+}
+
+/* =========================
+   NAVBAR REFACTOR
+========================= */
+.site-navbar {
+    width: 100%;
+    background: #020256;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+}
+
+.site-navbar-inner {
+    width: min(1200px, 92%);
+    min-height: 84px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.site-navbar-logo {
+    display: flex;
+    align-items: center;
+}
+
+.site-navbar-links {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.site-navbar-links a {
+    text-decoration: none;
+    color: white;
+    font-weight: 600;
+    font-size: 0.98rem;
+    padding: 9px 16px;
+    border-radius: 999px;
+    transition: 0.2s ease;
+    display: inline-block;
+}
+
+.site-navbar-links a:hover,
+.site-navbar-links a.active {
+    background-color: white;
+    color: #222;
+}
+
+/* =========================
+   PAGE HEADER CARD
+========================= */
+.page-header-card {
+    background: white;
+    border-radius: 18px;
+    padding: 24px 26px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    margin-bottom: 24px;
+}
+
+.page-title {
+    margin: 0 0 8px 0;
+    font-size: 2.2rem;
+    color: #222;
+}
+
+.page-subtitle {
+    margin: 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+/* =========================
+   FORM PAGES
+========================= */
+.form-page {
+    width: min(900px, 100%);
+    margin: 0 auto;
+}
+
+.form-card {
+    background: white;
+    border-radius: 18px;
+    padding: 26px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.recipe-form .form-group label {
+    font-weight: 600;
+    color: #333;
+}
+
+.recipe-form input,
+.recipe-form textarea,
+.recipe-form select {
+    border-radius: 12px !important;
+}
+
+.form-actions {
+    display: flex;
+    gap: 12px;
+    margin-top: 22px;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   DETAILS PAGE
+========================= */
+.details-page {
+    width: min(1000px, 100%);
+    margin: 0 auto;
+}
+
+.details-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+.details-card-image {
+    width: 100%;
+    height: 360px;
+    background: #d9d9d9;
+    overflow: hidden;
+}
+
+.details-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.details-card-body {
+    padding: 28px;
+}
+
+.details-header {
+    margin-bottom: 20px;
+}
+
+.details-title {
+    margin: 0 0 12px 0;
+    font-size: 2.3rem;
+    line-height: 1.15;
+}
+
+.details-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #777;
+    font-size: 0.96rem;
+    margin-bottom: 14px;
+}
+
+.details-category {
+    color: #2458b8;
+    font-weight: 600;
+}
+
+.details-tags {
+    margin-bottom: 8px;
+}
+
+.details-content {
+    color: #333;
+    line-height: 1.8;
+    font-size: 1rem;
+}
+
+.details-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 28px;
+}
+
+/* =========================
+   DELETE PAGE
+========================= */
+.delete-page {
+    width: min(950px, 100%);
+    margin: 0 auto;
+}
+
+.delete-card {
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: grid;
+    grid-template-columns: 320px 1fr;
+}
+
+.delete-card-image {
+    min-height: 100%;
+    background: #d9d9d9;
+}
+
+.delete-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.delete-card-content {
+    padding: 24px;
+}
+
+.delete-card-title {
+    margin: 0 0 12px 0;
+    font-size: 2rem;
+    line-height: 1.15;
+}
+
+.delete-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    color: #777;
+    font-size: 0.95rem;
+    margin-bottom: 14px;
+}
+
+.delete-card-category {
+    color: #2458b8;
+    font-weight: 600;
+}
+
+.delete-card-text {
+    color: #444;
+    line-height: 1.7;
+    margin-bottom: 20px;
+}
+
+.delete-warning-text {
+    color: #c62828;
+    font-weight: 700;
+    margin-bottom: 18px;
+}
+
+.delete-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+/* =========================
+   RESPONSIVE
+========================= */
+@media (max-width: 900px) {
+    .delete-card {
+        grid-template-columns: 1fr;
+    }
+
+    .delete-card-image {
+        height: 240px;
+    }
+
+    .details-card-image {
+        height: 260px;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-navbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 14px 0;
+    }
+
+    .site-navbar-logo {
+        justify-content: center;
+    }
+
+    .site-navbar-links {
+        justify-content: center;
+    }
+
+    .page-title {
+        font-size: 1.8rem;
+    }
+
+    .details-title,
+    .delete-card-title {
+        font-size: 1.7rem;
+    }
+
+    .form-actions,
+    .details-actions,
+    .delete-actions {
+        flex-direction: column;
+    }
+
+    .form-actions .btn,
+    .details-actions .btn,
+    .delete-actions .btn {
+        width: 100%;
+    }
+}
