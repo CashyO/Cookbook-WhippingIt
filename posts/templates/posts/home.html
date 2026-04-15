@@ -4,63 +4,98 @@
 {% extends 'posts/base.html' %}
 
 {% block content %}
-    <div class="main-container">
-        <div class="topbar">
-            <h1 class="title">Welcome to the Cookbook home page</h1>
-        </div>
-
-        {% if recipescount == 0 %}
-        <p>There are no recipe posts available.</p>
-        {% else %}
-
+<div class="main-container home-page">
+    <div class="topbar home-topbar">
         <div>
+            <h1 class="title">Welcome to the Cookbook home page</h1>
+            <p class="home-subtitle">Browse all recipe posts in the cookbook.</p>
+        </div>
+    </div>
+
+    <div class="home-controls">
+        <form method="GET" action="{% url 'home' %}" class="search-form">
+            <div class="search-bar">
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search_query }}"
+                    placeholder="Search recipes..."
+                    class="search-input"
+                >
+                {% if selected_category %}
+                    <input type="hidden" name="category" value="{{ selected_category }}">
+                {% endif %}
+                <button type="submit" class="search-btn">Search</button>
+            </div>
+        </form>
+
+        <div class="category-filter">
+            <a
+                href="{% url 'home' %}{% if search_query %}?q={{ search_query|urlencode }}{% endif %}"
+                class="filter-chip {% if not selected_category %}active{% endif %}"
+            >
+                All
+            </a>
+
+            {% for category in categories %}
+                <a
+                    href="{% url 'home' %}?{% if search_query %}q={{ search_query|urlencode }}&{% endif %}category={{ category.name|urlencode }}"
+                    class="filter-chip {% if selected_category == category.name %}active{% endif %}"
+                >
+                    {{ category.name }}
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+
+    {% if recipescount == 0 %}
+        <div class="empty-state">
+            <p>There are no recipe posts available.</p>
+        </div>
+    {% else %}
+        <div class="recipe-grid">
             {% for recipe in recipes %}
-                <div class="article">
-                    <div class="article-image">
+                <div class="recipe-card">
+                    <div class="recipe-card-image">
                         {% if recipe.image %}
-                        <img src="{{recipe.image.url}}">
+                            <img src="{{ recipe.image.url }}" alt="{{ recipe.title }}">
+                        {% else %}
+                            <div class="recipe-card-placeholder"></div>
                         {% endif %}
                     </div>
-                    
-                    <div class="article-content">
-                        <h2>{{recipe.title}}</h2>
 
-                        <div class="article-details">
-                            <div class="article-date">{{recipe.created_on|date:"F j, Y"}}</div>
+                    <div class="recipe-card-content">
+                        <h2 class="recipe-card-title">{{ recipe.title }}</h2>
 
-                            {% if recipe.category%}
-                            <div class="article-dot"> &middot; </div>
-                            <p class="article-category">{{recipe.category.name}}</p>
-                            {% endif%}
+                        <div class="recipe-card-details">
+                            <span class="recipe-card-date">{{ recipe.created_on|date:"F j, Y" }}</span>
 
-                            <div class="article-dot"> &middot; </div> 
-                            <p class="article-category">by {{recipe.created_by.username}}</p>
+                            {% if recipe.category %}
+                                <span class="recipe-card-dot">&middot;</span>
+                                <span class="recipe-card-category">{{ recipe.category.name }}</span>
+                            {% endif %}
 
+                            <span class="recipe-card-dot">&middot;</span>
+                            <span class="recipe-card-author">by {{ recipe.created_by.username }}</span>
                         </div>
 
-                        
-                        <p>{{recipe.content|truncatechars:200}}</p>
+                        <p class="recipe-card-text">{{ recipe.content|truncatechars:120 }}</p>
 
-                        {% if recipe.tags.all%}
-                        <div class="tag-holder">
-                            {% for tag in recipe.tags.all %}
-                                <span class="article-tags">#{{tag.name}}</span>
-                            {% endfor%}
+                        <div class="recipe-card-tags">
+                            {% for tag in recipe.tags.all|slice:":3" %}
+                                <span class="article-tags">#{{ tag.name }}</span>
+                            {% endfor %}
+                        </div>
 
+                        <div class="article-actions recipe-card-actions">
+                            <a class="btn btn-outline-primary" href="{% url 'details' recipe.id %}">
+                                View Details
+                            </a>
                         </div>
-                        {% endif%}
-                        
-                        <div class="article-actions">
-                            <a class="btn btn-outline-primary" href="{%url 'details' recipe.id %}">View Details</a>
-                        </div>
-                    
                     </div>
-
-                    
                 </div>
             {% endfor %}
         </div>
-        {% endif %}
-    </div>
-
+    {% endif %}
+</div>
 {% endblock %}

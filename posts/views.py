@@ -1,4 +1,5 @@
 from django.shortcuts import redirect, render
+from django.db.models import Q
 from .forms import *
 from .models import *
 from django.contrib.auth.decorators import login_required
@@ -8,12 +9,36 @@ from django.contrib.auth.decorators import login_required
 
 # Home page view
 def home(request):
+    # Get the search query from the request
+    q = request.GET.get('q', '').strip()
+    selected_category = request.GET.get('category', '').strip()
+
     # Retrieve all recipe posts from the database (.filter() can be used to filter the results based on certain criteria) 
     recipes = RecipePost.objects.all().order_by('-created_on') 
+    categories = Category.objects.all().order_by('name')
+
+    # Filter the recipe posts based on the search query and selected category
+    if q: 
+        recipes = recipes.filter(
+            Q(title__icontains=q) |
+            Q(content__icontains=q) |
+            Q(category__name__icontains=q) |
+            Q(tags__name__icontains=q) |
+            Q(created_by__username__icontains=q)
+        ).distinct()
+    if selected_category:
+        recipes = recipes.filter(
+            category__name=selected_category
+        )
+
     recipescount = recipes.count()
+
     context = {
         'recipes': recipes,
-        'recipescount': recipescount
+        'recipescount': recipescount,
+        'categories': categories,
+        'selected_category': selected_category,
+        'search_query': q,
         }
     return render(request, 'posts/home.html', context)
 
