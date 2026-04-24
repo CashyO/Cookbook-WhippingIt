@@ -36,3 +36,16 @@ class RecipePost(models.Model): # Create table
     def __str__(self):
         return self.title # used to identify the record
     
+# Class for comments on recipe posts 
+class Comment(models.Model):
+    recipe = models.ForeignKey(RecipePost, on_delete=models.CASCADE, related_name='comments')
+    created_by = models.ForeignKey(User, on_delete=models.CASCADE)
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    modified_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        ordering = ['created_on']
+
+    def __str__(self):
+        return f'Comment by {self.created_by.username} on {self.recipe.title}'

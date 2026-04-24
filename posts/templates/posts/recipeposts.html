@@ -40,6 +40,7 @@
                                 <span class="recipe-card-dot">&middot;</span>
                                 <span class="recipe-card-category">{{ recipe.category.name }}</span>
                             {% endif %}
+
                         </div>
 
                         <p class="recipe-card-text">{{ recipe.content|truncatechars:120 }}</p>
@@ -49,6 +50,8 @@
                                 <span class="article-tags">#{{ tag.name }}</span>
                             {% endfor %}
                         </div>
+
+                        <span class="recipe-card-author"> {{ recipe.comments.count }} comments </span>
 
                         <div class="recipe-card-actions recipepost-actions">
                             <a class="btn btn-outline-primary" href="{% url 'details' recipe.id %}">View</a>

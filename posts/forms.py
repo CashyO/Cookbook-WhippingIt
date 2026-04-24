@@ -13,7 +13,7 @@ class RecipePostForm(forms.ModelForm):
         widget=forms.Textarea(attrs={'placeholder': 'Enter the content of your recipe', 'rows': 8})
     )
     image = forms.ImageField(
-        label= "UploadRecipe Image",
+        label= "Upload Recipe Image",
         required=False,
         widget=forms.ClearableFileInput(attrs={'class': 'form-control-file'})
     )
@@ -35,3 +35,15 @@ class RecipePostForm(forms.ModelForm):
         model= RecipePost
         fields = ['title', 'content', 'image', 'category', 'tags']
 
+# Create a form for the comment model in models.py
+class CommentForm(forms.ModelForm):
+    body = forms.CharField(label="Leave a Comment", widget=forms.Textarea(attrs={
+                                'placeholder': 'Write your comment here...',
+                                'rows': 4,
+                                'class': 'form-control'
+                            })
+                        )
+
+    class Meta:
+        model = Comment
+        fields = ['body']

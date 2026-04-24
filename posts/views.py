@@ -113,5 +113,27 @@ def delete(request, pk):
 # Details page view
 def details(request, pk):
     recipe = RecipePost.objects.get(id=pk)
-    context = {'recipe': recipe}
+    comments = recipe.comments.all()
+    comment_form = CommentForm()
+
+    if request.method == 'POST':
+        if request.user.is_authenticated:
+            comment_form = CommentForm(request.POST)
+
+            if comment_form.is_valid():
+                comment = comment_form.save(commit=False)
+                comment.recipe = recipe
+                comment.created_by = request.user
+                comment.save()
+
+                return redirect('details', pk=recipe.id)
+        else:
+            return redirect('login')
+
+    context = {
+        'recipe': recipe,
+        'comments': comments,
+        'comment_form': comment_form,
+    }
+
     return render(request, 'posts/details.html', context)
