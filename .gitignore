@@ -20,7 +20,7 @@ env/
 *.pot
 *.pyc
 local_settings.py
-#db.sqlite3                 # for production, but you might want to keep it for development
+db.sqlite3                 # for production, but you might want to keep it for development
 db.sqlite3-journal
 
 # =========================
