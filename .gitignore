@@ -4,7 +4,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-*.pyc
+#*.pyc                      # for production, but you might want to keep it for development
 
 # =========================
 # Virtual Environment
@@ -20,7 +20,7 @@ env/
 *.pot
 *.pyc
 local_settings.py
-db.sqlite3
+#db.sqlite3                 # for production, but you might want to keep it for development
 db.sqlite3-journal
 
 # =========================
