@@ -17,5 +17,7 @@ urlpatterns = [
     # Delete page url   
     path('delete/<int:pk>', views.delete, name='delete'),
     # Details page url   
-    path('details/<int:pk>', views.details, name='details')
+    path('details/<int:pk>', views.details, name='details'),
+    # Comment delete url
+    path('comment/delete/<int:pk>', views.delete_comment, name='delete_comment')
 ]

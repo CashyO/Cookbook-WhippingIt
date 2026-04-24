@@ -87,6 +87,15 @@
                             </div>
 
                             <p class="comment-body">{{ comment.body|linebreaksbr }}</p>
+                            {% if user == comment.created_by %}
+                                <form method="post" action="{% url 'delete_comment' comment.id %}" class="comment-delete-form">
+                                    {% csrf_token %}
+                                    <button type="submit" class="comment-delete-btn">
+                                        Delete
+                                    </button>
+                                </form>
+                            {% endif %}
+                            
                         </div>
                     {% endfor %}
                 </div>

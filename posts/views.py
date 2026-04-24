@@ -137,3 +137,21 @@ def details(request, pk):
     }
 
     return render(request, 'posts/details.html', context)
+
+# Comment delete view
+@login_required
+def delete_comment(request, pk):
+    # Get the comment object with the given id
+    comment = Comment.objects.get(id=pk)
+    recipe_id = comment.recipe.id
+
+    # Check if the user is the creator of the comment before allowing deletion
+    if request.user != comment.created_by:
+        return redirect('details', pk=recipe_id)
+
+    # Handle the POST request to delete the comment
+    if request.method == 'POST':
+        comment.delete()
+        return redirect('details', pk=recipe_id)
+
+    return redirect('details', pk=recipe_id)
