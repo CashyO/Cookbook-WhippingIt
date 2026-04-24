@@ -34,3 +34,4 @@ class RecipePostForm(forms.ModelForm):
     class Meta:
         model= RecipePost
         fields = ['title', 'content', 'image', 'category', 'tags']
+
