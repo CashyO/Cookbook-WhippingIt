@@ -12,6 +12,7 @@ def home(request):
     # Get the search query from the request
     q = request.GET.get('q', '').strip()
     selected_category = request.GET.get('category', '').strip()
+    selected_tag = request.GET.get('tag', '').strip()
 
     # Retrieve all recipe posts from the database (.filter() can be used to filter the results based on certain criteria) 
     recipes = RecipePost.objects.all().order_by('-created_on') 
@@ -30,6 +31,10 @@ def home(request):
         recipes = recipes.filter(
             category__name=selected_category
         )
+    if selected_tag:
+        recipes = recipes.filter(
+            tags__name=selected_tag
+        ).distinct()
 
     recipescount = recipes.count()
 
@@ -38,6 +43,7 @@ def home(request):
         'recipescount': recipescount,
         'categories': categories,
         'selected_category': selected_category,
+        'selected_tag': selected_tag,
         'search_query': q,
         }
     return render(request, 'posts/home.html', context)
