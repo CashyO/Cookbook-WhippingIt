@@ -34,7 +34,7 @@
                 {% if recipe.tags.all %}
                     <div class="details-tags">
                         {% for tag in recipe.tags.all %}
-                            <span class="article-tags">#{{ tag.name }}</span>
+                            <a href="{% url 'home' %}?tag={{ tag.name|urlencode }}" class="article-tags">#{{ tag.name }}</a>
                         {% endfor %}
                     </div>
                 {% endif %}
